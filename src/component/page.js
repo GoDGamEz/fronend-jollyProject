@@ -276,7 +276,7 @@ export default function Page() {
                         <>
                           <h3 className="-my-3 flow-root">
                             <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                              <span className="text-[15px] font-medium text-gray-900">
+                              <span className="text-[15px] font-medium text-gray-900 text-left">
                                 {section.name}
                               </span>
                               <span className="ml-6 flex items-center">
