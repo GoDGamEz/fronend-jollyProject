@@ -88,7 +88,7 @@ export default function Page() {
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl z-60">
                   <div className="flex items-center justify-between px-4">
                     <h2 className="text-lg font-medium text-gray-900">
                       Filters
@@ -104,11 +104,11 @@ export default function Page() {
                   </div>
 
                   {/* Filters */}
-                  <form className="mt-4 border-t border-gray-200">
+                  <form className="mt-4">
                     <h3 className="sr-only">Categories</h3>
                     <ul
                       role="list"
-                      className="px-2 py-3 font-medium text-gray-900"
+                      className="px-2 py-0 font-medium text-gray-900 border-b border-gray-200"
                     >
                       {subCategories.map((category) => (
                         <li key={category.name}>
@@ -123,7 +123,7 @@ export default function Page() {
                       <Disclosure
                         as="div"
                         key={section.id}
-                        className="border-t border-gray-200 px-4 py-6"
+                        className="border-b border-gray-200 px-4 py-6"
                       >
                         {({ open }) => (
                           <>
