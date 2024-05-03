@@ -42,7 +42,7 @@ export default function Navbar() {
                       className="mx-0 lg:mx-2 w-[28px] lg:w-[30px]"
                     />
                   </div>
-                  <div className="flex flex-shrink-0 -ml-16 sm:ml-16 items-center block md:hidden">
+                  <div className="flex flex-shrink-0 -ml-[72px] sm:ml-16 items-center block md:hidden">
                     <SearchBar />
                   </div>
                   <div className="hidden md:ml-6 md:block">
