@@ -9,6 +9,7 @@ const apiClient = axios.create({
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showSearch, setShowSearch] = useState(false);
+  const [showSearchList, setShowSearchList] = useState(false);
   const [data, setData] = useState(null);
 
   const [searchFetch, setSearchFetch] = useState(false);
@@ -55,11 +56,12 @@ const SearchBar = () => {
               className="ml-1 mr-2 w-[130px] sm:w-[225px] md:w-[125px] lg:w-[200px] 2xl:w-[250px] h-[28px] outline-none placeholder-gray-800 text-[15px] lg:text-[16px] bg-[#fcfcfc]"
               onClick={() => {
                 setShowSearch(true);
+                setShowSearchList(true);
               }}
             />
-            {showSearch && (<div><X className="w-5 h-5 lg:w-6 lg:h-6 items-end cursor-pointer" onClick={() => setShowSearch(false)} /></div>)}
+            {showSearch && (<div><X className="w-5 h-5 lg:w-6 lg:h-6 items-end cursor-pointer" onClick={() => {setShowSearchList(false); setTimeout(() => {setShowSearch(false);}, 305)}} /></div>)}
           </div>
-          <div className={`block absolute px-9 w-[213px] sm:w-[318px] md:w-[218px] lg:w-[298px] 2xl:w-[348px] ml-0.5 mt-2 z-10 bg-white rounded-[18px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out ${showSearch ? 'max-h-[26.5vh]' : 'max-h-0'
+          <div className={`block absolute px-9 w-[213px] sm:w-[318px] md:w-[218px] lg:w-[298px] 2xl:w-[348px] ml-0.5 mt-2 z-10 bg-white rounded-[18px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out ${showSearchList ? 'max-h-[26.5vh]' : 'max-h-0'
             }`}>
             <ul className="py-2">
               {data ? (
