@@ -52,14 +52,14 @@ const SearchBar = () => {
               type="text"
               value={searchTerm}
               onChange={(e) => handleSearch(e.target.value)}
-              className="ml-1 mr-2 w-[100px] sm:w-[225px] md:w-[125px] lg:w-[200px] 2xl:w-[250px] h-[28px] outline-none placeholder-gray-800 text-[15px] lg:text-[16px] bg-[#fcfcfc]"
+              className="ml-1 mr-2 w-[150px] sm:w-[225px] md:w-[125px] lg:w-[200px] 2xl:w-[250px] h-[28px] outline-none placeholder-gray-800 text-[15px] lg:text-[16px] bg-[#fcfcfc]"
               onClick={() => {
                 setShowSearch(true);
               }}
             />
             {showSearch && (<div><X className="w-5 h-5 lg:w-6 lg:h-6 items-end cursor-pointer" onClick={() => setShowSearch(false)} /></div>)}
           </div>
-          <div className={`block absolute px-9 w-[188px] sm:w-[318px] md:w-[218px] lg:w-[298px] 2xl:w-[348px] ml-0.5 mt-2 z-10 bg-white rounded-[18px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out ${showSearch ? 'max-h-[26.5vh]' : 'max-h-0'
+          <div className={`block absolute px-9 w-[238px] sm:w-[318px] md:w-[218px] lg:w-[298px] 2xl:w-[348px] ml-0.5 mt-2 z-10 bg-white rounded-[18px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out ${showSearch ? 'max-h-[26.5vh]' : 'max-h-0'
             }`}>
             <ul className="py-2">
               {data ? (
