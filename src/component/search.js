@@ -47,7 +47,7 @@ const SearchBar = () => {
           <div
             className="flex items-center outline-none rounded-[18px] px-4 py-1 border border-gray-800 shadow-md bg-[#fcfcfc]"
           >
-            <div><Search size={21} className="mr-2 w-4 h-4 lg:w-5 lg:h-5" /></div>
+            <div><Search size={21} className="mr-1 sm:mr-2 w-4 h-4 lg:w-5 lg:h-5" /></div>
             <input
               type="text"
               value={searchTerm}
