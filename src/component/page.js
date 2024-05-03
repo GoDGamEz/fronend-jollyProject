@@ -182,7 +182,7 @@ export default function Page() {
           </Dialog>
         </Transition.Root>
 
-        <main className="mx-auto px-4 sm:px-6 lg:px-12">
+        <main className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center lg:items-baseline justify-between border-b border-gray-200 pb-6 pt-16">
             <h1 className="flex text-3xl font-bold tracking-tight text-gray-900 px-3">
               <PackageSearch size={32} className="mr-3" /> All Products

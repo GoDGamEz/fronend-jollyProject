@@ -106,7 +106,7 @@ export default function Products() {
   return (
     <div className="bg-[#f9f9f9] font-sans-thai">
       <div className="mx-auto">
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+        <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-7 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-6">
           {products.map((product) => (
             <div
               key={product.id}
@@ -121,17 +121,17 @@ export default function Products() {
               </div>
               <div className="m-4 flex justify-between">
                 <div className="mr-4">
-                  <h3 className="text-[14px] text-gray-800">
+                  <h3 className="text-[13px] xl:text-[14px] text-gray-800">
                     <a href={product.href}>
                       <span aria-hidden="true" className="absolute inset-0" />
                       {product.name}
                     </a>
                   </h3>
-                  <p className="mt-1 text-[14px] text-gray-500">
+                  <p className="mt-1 text-[12px] xl:text-[13px] text-gray-500">
                     Color: {product.color}
                   </p>
                 </div>
-                <p className="text-[14px] font-semibold text-gray-800">
+                <p className="text-[13px] xl:text-[14px] font-semibold text-gray-800">
                   {product.price}
                 </p>
               </div>
