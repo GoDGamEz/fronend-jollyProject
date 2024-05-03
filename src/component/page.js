@@ -6,8 +6,7 @@ import {
   ChevronDownIcon,
   FunnelIcon,
   MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
+  PlusIcon
 } from "@heroicons/react/20/solid";
 import Product from "./product";
 

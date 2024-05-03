@@ -2,9 +2,6 @@ import fender from "./fender.png";
 import tele from "./tele.png";
 import bass from "./bass.png";
 import keyboard from "./keyboard.png";
-import Sidebar from "./sidebar";
-import { PackageSearch } from "lucide-react";
-
 const products = [
   {
     id: 1,
@@ -113,16 +110,17 @@ export default function Products() {
           {products.map((product) => (
             <div
               key={product.id}
-              className="relative transition ease-in-out delay-150 hover:scale-105 rounded-[10px] bg-white shadow-md"
+              className="relative transition ease-in-out delay-100 hover:scale-105 rounded-[10px] bg-white shadow-md"
             >
               <div className="aspect-h-1 shadow-sm aspect-w-1 w-full overflow-hidden border-b rounded-t-[10px] bg-gray-200 lg:aspect-none">
                 <img
                   src={product.imageSrc}
+                  alt=""
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />
               </div>
               <div className="m-4 flex justify-between">
-                <div className="mr-8">
+                <div className="mr-4">
                   <h3 className="text-[14px] text-gray-800">
                     <a href={product.href}>
                       <span aria-hidden="true" className="absolute inset-0" />
