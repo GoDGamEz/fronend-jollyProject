@@ -2,13 +2,15 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Drum, ShoppingCart, EllipsisVertical } from "lucide-react";
 import SearchBar from "./search";
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const navigation = [
-  { name: "All", href: "#", current: true },
-  { name: "Electric", href: "#", current: false },
-  { name: "Acoustic", href: "#", current: false },
-  { name: "Accessories", href: "#", current: false },
+  { name: "Home", href: "/" },
+  { name: "All", href: "/all" },
+  { name: "Electric", href: "/electric" },
+  { name: "Acoustic", href: "/acoustic" },
+  { name: "Accessories", href: "/accessories" },
 ];
 const options = [{ name: "Add Data", href: "#", current: true }];
 function classNames(...classes) {
@@ -16,6 +18,24 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const [active, setActive] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    const url = location.pathname; // Get the current pathname from the location object
+    const parts = url.split("/");
+    if (parts.includes('all'))
+      setActive('All')
+    else if (parts.includes('electric')) 
+      setActive('Electric')
+    else if (parts.includes('acoustic'))
+      setActive('Acoustic')
+    else if (parts.includes('accessories'))
+      setActive('Accessories')
+    else 
+    setActive('Home')
+  }, [active]);
+
   return (
     <div className="bg-gradient-to-tr from-[#1e92d5] to-[#3d45cb] py-2 shadow-xl z-50 font-sans-thai">
       <Disclosure as="nav">
@@ -51,13 +71,11 @@ export default function Navbar() {
                         <a
                           key={item.name}
                           href={item.href}
-                          className={classNames(
-                            item.current
-                              ? "bg-gray-900 text-white shadow-md"
-                              : "text-gray-100 hover:bg-gray-900 hover:shadow-md hover:text-white",
-                            "rounded-md px-3 py-2 text-[15px] lg:text-[16px] font-medium"
-                          )}
-                          aria-current={item.current ? "page" : undefined}
+                          className={`
+                            ${active === item.name ? "bg-gray-900 text-white shadow-md"
+                              : "text-gray-100 hover:bg-gray-900 hover:shadow-md hover:text-white" }
+                            rounded-md px-3 py-2 text-[15px] lg:text-[16px] font-medium
+                            `}
                         >
                           {item.name}
                         </a>
@@ -66,7 +84,7 @@ export default function Navbar() {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex space-x-2 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <div className="hidden md:block">
+                  <div className="hidden lg:block">
                     <SearchBar />
                   </div>
                   <button

@@ -1,17 +1,21 @@
-import Navbar from "./component/navbar";
 import React from "react";
-import Page from "./component/page"
+import { Route, Routes } from 'react-router-dom';
+import All from "./component/page/all"
+import Electric from "./component/page/electric"
+import Acoustic from "./component/page/acoustic"
+import Accessories from "./component/page/accessories"
+import Home from "./component/page/home"
 
 function App() {
   return (
-    <div className="bg-[#f9f9f9] min-h-[100vh]">
-      <header className="sticky top-0 z-10">
-        <Navbar />
-      </header>
-      <div className="col-start-2 col-span-4"> 
-        <Page />
-      </div>
-    </div>
+    <Routes>
+      <Route path="/all" element={<All />} />
+      <Route path="/electric" element={<Electric />} />
+      <Route path="/acoustic" element={<Acoustic />} />
+      <Route path="/accessories" element={<Accessories />} />
+      <Route path="/" element={<Home />} />
+      {/*<Route path="*" element={<Missing />} />*/}
+    </Routes>
   );
 }
 
