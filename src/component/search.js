@@ -59,7 +59,7 @@ const SearchBar = () => {
                 setShowSearchList(true);
               }}
             />
-            {showSearch && (<div><X className="w-5 h-5 lg:w-6 lg:h-6 items-end cursor-pointer" onClick={() => {setShowSearchList(false); setTimeout(() => {setShowSearch(false);}, 305)}} /></div>)}
+            {showSearch && (<div><X className="w-5 h-5 lg:w-6 lg:h-6 items-end cursor-pointer" onClick={() => {setShowSearchList(false); setTimeout(() => {setShowSearch(false);}, 400)}} /></div>)}
           </div>
           <div className={`block absolute px-9 w-[213px] sm:w-[318px] md:w-[218px] lg:w-[298px] 2xl:w-[348px] ml-0.5 mt-2 z-10 bg-white rounded-[18px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out ${showSearchList ? 'max-h-[26.5vh]' : 'max-h-0'
             }`}>
