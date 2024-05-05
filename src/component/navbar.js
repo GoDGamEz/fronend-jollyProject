@@ -11,8 +11,8 @@ import AllHover from "./navComponent/allHover";
 const navigation = [
   { name: <HomeHover />, href: "/" },
   { name: <AllHover />, href: "/all" },
-  { name: <BrandsHover />, href: "/brands" },
   { name: <ShopHover />, href: "/shop" },
+  { name: <BrandsHover />, href: "/brands" },
 ];
 const options = [{ name: "Add Data", href: "#", current: true }];
 function classNames(...classes) {

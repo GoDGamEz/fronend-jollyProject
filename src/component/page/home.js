@@ -10,7 +10,7 @@ function Home() {
         <Navbar />
       </header>
       <div className="flex-grow relative">
-        <img src={homePic} alt="Home" className="w-full h-full object-cover" />
+        <img src={homePic} alt="Home" className="w-full h-full object-cover shadow-xl" />
         <div className="absolute top-[50%] xl:top-[40%] left-[6%] md:left-[8%] lg:left-[10%] transform -translate-y-1/2 bg-black text-white p-6 md:p-7 lg:p-8 space-y-4 md:space-y-5 lg:space-y-6 rounded-[10px] shadow-2xl">
           <h1 className="flex text-2xl md:text-3xl lg:text-4xl">
             <div>

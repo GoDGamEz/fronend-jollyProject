@@ -1,6 +1,4 @@
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
 const solutions = [
   {
@@ -23,19 +21,9 @@ const solutions = [
 const callsToAction = [];
 
 export default function BrandsHover() {
-  const [active, setActive] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    const url = location.pathname; // Get the current pathname from the location object
-    const parts = url.split("/");
-    if (parts.includes('brands'))
-      setActive(true)
-  }, [active]);
-
   return (
-    <div className="relative group py-3">
-      <div className={`${active ? "bg-gray-900 text-white shadow-md" : "text-gray-100 group-hover:bg-gray-900 group-hover:shadow-md group-hover:text-white" } px-3 py-2 rounded-md text-[15px] lg:text-[16px] font-medium`}>
+    <div className="relative group py-0 md:py-3">
+      <div className={`text-gray-100 group-hover:bg-gray-900 group-hover:shadow-md group-hover:text-white px-3 py-2 rounded-md text-[15px] lg:text-[16px] font-medium`}>
         <div className="inline-flex items-center text-[15px] lg:text-[16px] font-medium gap-x-1 text-sm leading-6 outline-none">
           <span>Brands</span>
           <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
@@ -43,7 +31,7 @@ export default function BrandsHover() {
 
         <div className="absolute left-1/2 z-10 mt-5 flex w-screen group-hover:max-w-max group-hover:max-h-max max-w-0 max-h-0 -translate-x-1/2 px-4">
           <div className="w-full flex-auto overflow-hidden rounded-[18px] bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
-            <div className="p-4 grid grid-cols-3 gap-x-4 gap-y-1">
+            <div className="p-4 grid grid-cols-3 gap-x-6 gap-y-1">
               {solutions.map((item) => (
                 <div
                   key={item.name}
