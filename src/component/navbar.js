@@ -99,7 +99,7 @@ export default function Navbar() {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-2 z-10 mt-3 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Items className="absolute right-2 z-10 mt-3 w-40 origin-top-right rounded-md bg-white shadow-2xl outline-none">
                         <div className="py-1">
                           {options.map((option) => (
                             <Menu.Item key={option.name}>
