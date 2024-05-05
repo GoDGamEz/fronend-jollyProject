@@ -11,23 +11,23 @@ function Home() {
       </header>
       <div className="flex-grow relative">
         <img src={homePic} alt="Home" className="w-full h-full object-cover" />
-        <div className="absolute top-1/2 left-[10%] transform -translate-y-1/2 bg-black text-white p-8 space-y-6 rounded-[10px] shadow-2xl">
-          <h1 className="flex text-4xl">
+        <div className="absolute top-[50%] xl:top-[40%] left-[6%] md:left-[8%] lg:left-[10%] transform -translate-y-1/2 bg-black text-white p-6 md:p-7 lg:p-8 space-y-4 md:space-y-5 lg:space-y-6 rounded-[10px] shadow-2xl">
+          <h1 className="flex text-2xl md:text-3xl lg:text-4xl">
             <div>
-              <Store size={36} className="mr-4" />
+              <Store size={36} className="mr-2 md:mr-3 lg:mr-4 w-[28px] md:w-[32px] lg:w-[36px]" />
             </div>
             Welcome To JollyShop
           </h1>
-          <p className="text-xl ml-1">Subtitle or Description Here</p>
+          <p className="text-sm md:text-lg lg:text-xl ml-1">Subtitle or Description Here</p>
           <div>
             <a href="/all">
               <button
                 type="button"
-                className="relative flex shadow-md rounded-[10px] bg-gradient-to-tr from-[#1e92d5] to-[#3d45cb] p-[10px] text-gray-100 hover:text-white focus:outline-none transition ease-in-out delay-100 hover:scale-110"
+                className="relative flex items-center shadow-md rounded-[10px] bg-gradient-to-tr from-[#1e92d5] to-[#3d45cb] p-[8px] md:p-[9px] lg:p-[10px] text-gray-100 hover:text-white focus:outline-none transition ease-in-out delay-100 hover:scale-110"
               >
-                <span className="text-lg">Shop Now!</span>
+                <span className="text-sm md:text-md lg:text-lg">Shop Now!</span>
                 <div>
-                  <ArrowRight size={24} className="ml-1 w-[23px] lg:w-[24px]" />
+                  <ArrowRight size={24} className="ml-1 w-[20px] md:w-[22px] lg:w-[24px]" />
                 </div>
               </button>
             </a>

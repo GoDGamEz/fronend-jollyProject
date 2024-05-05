@@ -24,8 +24,9 @@ const filters = [
     name: "หมวดสินค้า / Department",
     options: [
       { value: "All", label: "All", checked: true },
-      { value: "Electrics", label: "Electrics", checked: false },
-      { value: "Acoustics", label: "Acoustics", checked: false },
+      { value: "Electric Guitar", label: "Electric Guitar", checked: false },
+      { value: "Acoustic Guitar", label: "Acoustic Guitar", checked: false },
+      { value: "Bass", label: "Bass", checked: false },
       { value: "Accessories", label: "Accessories", checked: false },
     ],
   },
@@ -38,14 +39,12 @@ const filters = [
     id: "Type",
     name: "ชนิดสินค้า / Product Type",
     options: [
-      {
-        value: "กีต้าร์ / Guitars",
-        label: "กีต้าร์ / Guitars",
-        checked: false,
-      },
+      { value: "กีต้าร์ / Guitars",label: "กีต้าร์ / Guitars",checked: false },
       { value: "เบส / Bass", label: "เบส / Bass", checked: false },
+      { value: "คีย์บอร์ด / Keyboard", label: "คีย์บอร์ด / Keyboard", checked: false },
     ],
   },
+
 ];
 
 function classNames(...classes) {

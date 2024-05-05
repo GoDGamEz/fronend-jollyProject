@@ -2,7 +2,7 @@ import Navbar from "../navbar";
 import React from "react";
 import Page from "./page"
 
-function Acoustic() {
+function Shop() {
   return (
     <div className="bg-[#f9f9f9] min-h-[100vh]">
       <header className="sticky top-0 z-10">
@@ -15,4 +15,4 @@ function Acoustic() {
   );
 }
 
-export default Acoustic;
+export default Shop;

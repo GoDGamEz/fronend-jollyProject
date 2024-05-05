@@ -1,18 +1,16 @@
 import React from "react";
 import { Route, Routes } from 'react-router-dom';
 import All from "./component/page/all"
-import Electric from "./component/page/electric"
-import Acoustic from "./component/page/acoustic"
-import Accessories from "./component/page/accessories"
+import Brands from "./component/page/brands"
+import Shop from "./component/page/shop"
 import Home from "./component/page/home"
 
 function App() {
   return (
     <Routes>
       <Route path="/all" element={<All />} />
-      <Route path="/electric" element={<Electric />} />
-      <Route path="/acoustic" element={<Acoustic />} />
-      <Route path="/accessories" element={<Accessories />} />
+      <Route path="/brands" element={<Brands />} />
+      <Route path="/shop" element={<Shop />} />
       <Route path="/" element={<Home />} />
       {/*<Route path="*" element={<Missing />} />*/}
     </Routes>

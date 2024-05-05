@@ -2,15 +2,17 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Drum, ShoppingCart, EllipsisVertical } from "lucide-react";
 import SearchBar from "./search";
-import { Fragment, useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Fragment} from "react";
+import BrandsHover from "./navComponent/brandsHover";
+import ShopHover from "./navComponent/shopHover";
+import HomeHover from "./navComponent/homeHover";
+import AllHover from "./navComponent/allHover";
 
 const navigation = [
-  { name: "Home", href: "/" },
-  { name: "All", href: "/all" },
-  { name: "Electric", href: "/electric" },
-  { name: "Acoustic", href: "/acoustic" },
-  { name: "Accessories", href: "/accessories" },
+  { name: <HomeHover />, href: "/" },
+  { name: <AllHover />, href: "/all" },
+  { name: <BrandsHover />, href: "/brands" },
+  { name: <ShopHover />, href: "/shop" },
 ];
 const options = [{ name: "Add Data", href: "#", current: true }];
 function classNames(...classes) {
@@ -18,24 +20,6 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const [active, setActive] = useState('');
-  const location = useLocation();
-
-  useEffect(() => {
-    const url = location.pathname; // Get the current pathname from the location object
-    const parts = url.split("/");
-    if (parts.includes('all'))
-      setActive('All')
-    else if (parts.includes('electric')) 
-      setActive('Electric')
-    else if (parts.includes('acoustic'))
-      setActive('Acoustic')
-    else if (parts.includes('accessories'))
-      setActive('Accessories')
-    else 
-    setActive('Home')
-  }, [active]);
-
   return (
     <div className="bg-gradient-to-tr from-[#1e92d5] to-[#3d45cb] py-2 shadow-xl z-50 font-sans-thai">
       <Disclosure as="nav">
@@ -71,11 +55,6 @@ export default function Navbar() {
                         <a
                           key={item.name}
                           href={item.href}
-                          className={`
-                            ${active === item.name ? "bg-gray-900 text-white shadow-md"
-                              : "text-gray-100 hover:bg-gray-900 hover:shadow-md hover:text-white" }
-                            rounded-md px-3 py-2 text-[15px] lg:text-[16px] font-medium
-                            `}
                         >
                           {item.name}
                         </a>
@@ -84,12 +63,12 @@ export default function Navbar() {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex space-x-2 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <div className="hidden lg:block">
+                  <div className="hidden md:block">
                     <SearchBar />
                   </div>
                   <button
                     type="button"
-                    className="relative shadow-md rounded-[10px] bg-gray-800 p-2 text-gray-300 hover:text-white focus:outline-none transition ease-in-out delay-100 hover:scale-110"
+                    className="relative shadow-md rounded-[10px] bg-gray-900 p-2 text-gray-300 hover:text-white focus:outline-none transition ease-in-out delay-100 hover:scale-110"
                   >
                     <ShoppingCart size={23} className="w-[22px] lg:w-[23px]" />
                   </button>
@@ -101,7 +80,7 @@ export default function Navbar() {
                       <Menu.Button className="group inline-flex justify-center text-md font-medium text-gray-700 hover:text-gray-900">
                         <button
                           type="button"
-                          className="relative shadow-md rounded-[10px] bg-gray-800 p-2 text-gray-300 hover:text-white focus:outline-none transition ease-in-out delay-100 hover:scale-110"
+                          className="relative shadow-md rounded-[10px] bg-gray-900 p-2 text-gray-300 hover:text-white focus:outline-none transition ease-in-out delay-100 hover:scale-110"
                         >
                           <EllipsisVertical
                             size={23}
