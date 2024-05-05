@@ -29,7 +29,7 @@ export default function Navbar() {
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md px-2 py-1 hover:text-white outline-none">
+                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md px-2 py-1 text-gray-900 hover:text-white outline-none">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
                     {open ? (
