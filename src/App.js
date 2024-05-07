@@ -13,6 +13,8 @@ function App() {
       <Route path="/all" element={<All />} />
       <Route path="/brand/*" element={<All />} />
       <Route path="/category/*" element={<All />} />
+      <Route path="/ntom" element={<All />} />
+      <Route path="/mton" element={<All />} />
       <Route path="/brands" element={<Brands />} />
       <Route path="/shop" element={<Shop />} />
       <Route path="/" element={<Home />} />
