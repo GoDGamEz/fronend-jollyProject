@@ -2,6 +2,8 @@ import fender from "./fender.png";
 import tele from "./tele.png";
 import bass from "./bass.png";
 import keyboard from "./keyboard.png";
+import { Heart } from "lucide-react";
+import { useState } from "react";
 const products = [
   {
     id: 1,
@@ -103,6 +105,17 @@ const products = [
 ];
 
 export default function Products() {
+  const [selectLike, setSelectLike] = useState([]);
+
+  const handleLike = (like) => {
+    setSelectLike(prevLikes => {
+      if (prevLikes.includes(like)) {
+        return prevLikes.filter((l) => l !== like);
+      } else {
+        return [...prevLikes, like];
+      }
+    });
+  }
   return (
     <div className="bg-[#f9f9f9] font-sans-thai">
       <div className="mx-auto">
@@ -110,7 +123,7 @@ export default function Products() {
           {products.map((product) => (
             <div
               key={product.id}
-              className="relative transition ease-in-out delay-100 hover:scale-105 rounded-[10px] bg-white shadow-md"
+              className="relative group transition ease-in-out delay-75 hover:scale-105 rounded-[10px] bg-white shadow-md"
             >
               <div className="aspect-h-1 shadow-sm aspect-w-1 w-full overflow-hidden border-b rounded-t-[10px] bg-gray-200 lg:aspect-none">
                 <img
@@ -134,6 +147,15 @@ export default function Products() {
                 <p className="text-[13px] xl:text-[14px] font-semibold text-gray-800">
                   {product.price}
                 </p>
+              </div>
+              <div className="absolute top-0 right-0 m-4">
+                <button
+                  type="button"
+                  className=" relative shadow-md rounded-[10px] opacity-80 bg-gradient-to-tr from-[#1e92d5] to-[#3d45cb] p-2 text-white scale-0 focus:outline-none transition ease-linear delay-100 group-hover:scale-100"
+                  onClick={() => handleLike(product.name)}
+                >
+                  <Heart size={21} fill={selectLike.includes(product.name) ? '#ff0400' : 'none'} className={`${selectLike.includes(product.name) ? 'text-[#ff0400]' : ''} w-[20px] lg:w-[21px] transition-colors duration-200 ease-in-out`} />
+                </button>
               </div>
             </div>
           ))}

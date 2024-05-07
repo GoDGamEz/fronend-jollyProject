@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { PackageSearch, SquarePlus, SquareMinus } from "lucide-react";
@@ -9,6 +9,11 @@ import {
   PlusIcon,
 } from "@heroicons/react/20/solid";
 import Product from "../product";
+import axios from "axios";
+
+const apiClient = axios.create({
+  baseURL: "https://jolly-online-store-3faac26a998e.herokuapp.com",
+});
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -18,34 +23,6 @@ const sortOptions = [
   { name: "Price: High to Low", href: "#", current: false },
 ];
 const subCategories = [];
-const filters = [
-  {
-    id: "Department",
-    name: "หมวดสินค้า / Department",
-    options: [
-      { value: "All", label: "All", checked: true },
-      { value: "Electric Guitar", label: "Electric Guitar", checked: false },
-      { value: "Acoustic Guitar", label: "Acoustic Guitar", checked: false },
-      { value: "Bass", label: "Bass", checked: false },
-      { value: "Accessories", label: "Accessories", checked: false },
-    ],
-  },
-  {
-    id: "Brand",
-    name: "ยี่ห้อ / Brand",
-    options: [{ value: "Fender", label: "Fender", checked: false }],
-  },
-  {
-    id: "Type",
-    name: "ชนิดสินค้า / Product Type",
-    options: [
-      { value: "กีต้าร์ / Guitars",label: "กีต้าร์ / Guitars",checked: false },
-      { value: "เบส / Bass", label: "เบส / Bass", checked: false },
-      { value: "คีย์บอร์ด / Keyboard", label: "คีย์บอร์ด / Keyboard", checked: false },
-    ],
-  },
-
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -53,6 +30,51 @@ function classNames(...classes) {
 
 export default function Page() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [brandData, setBrandData] = useState([]);
+  const [categoriesData, setCategoriesData] = useState([]);
+
+  const filters = [
+    {
+      id: "Brand",
+      name: "ยี่ห้อ / Brand",
+      options: brandData,
+    },
+    {
+      id: "Type",
+      name: "ชนิดสินค้า / Product Type",
+      options: categoriesData,
+    },
+  ];
+
+  useEffect(() => {
+    if (categoriesData.length === 0) {
+      const fetchCategories = async () => {
+        try {
+          const response = await apiClient.get(`/categories`);
+          setCategoriesData(response.data);
+          console.log(response.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchCategories();
+    }
+  }, [categoriesData]);
+
+  useEffect(() => {
+    if (brandData.length === 0) {
+      const fetchBrand = async () => {
+        try {
+          const response = await apiClient.get(`/brand`);
+          setBrandData(response.data);
+          console.log(response.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchBrand();
+    }
+  }, [brandData]);
 
   return (
     <div className="bg-[#f9f9f9]">
@@ -150,22 +172,14 @@ export default function Page() {
                                 <div className="space-y-6">
                                   {section.options.map((option, optionIdx) => (
                                     <div
-                                      key={option.value}
+                                      key={option.Name}
                                       className="flex items-center"
                                     >
-                                      <input
-                                        id={`filter-mobile-${section.id}-${optionIdx}`}
-                                        name={`${section.id}[]`}
-                                        defaultValue={option.value}
-                                        type="checkbox"
-                                        defaultChecked={option.checked}
-                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                      />
                                       <label
                                         htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
                                         className="ml-3 min-w-0 flex-1 text-gray-500"
                                       >
-                                        {option.label}
+                                        {option.Name}
                                       </label>
                                     </div>
                                   ))}
@@ -264,68 +278,60 @@ export default function Page() {
                       </li>
                     ))}
                   </ul>
-                  <div className="w-full p-8 rounded-[10px] bg-white shadow-md">
-                    {filters.map((section) => (
-                      <Disclosure
-                        as="div"
-                        key={section.id}
-                        className="border-b border-gray-200 py-6"
-                        defaultOpen
-                      >
-                        {({ open }) => (
-                          <>
-                            <h3 className="-my-3 flow-root">
-                              <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                                <span className="text-[16px] font-medium text-gray-900 text-left">
-                                  {section.name}
-                                </span>
-                                <span className="ml-6 flex items-center">
-                                  {open ? (
-                                    <div className="text-gray-900">
-                                      <SquareMinus size={21} />
-                                    </div>
-                                  ) : (
-                                    <div className="text-gray-900">
-                                      <SquarePlus size={21} />
-                                    </div>
-                                  )}
-                                </span>
-                              </Disclosure.Button>
-                            </h3>
-                            <Disclosure.Panel className="pt-6">
-                              <div
-                                className={`transition-max-h duration-300 ease-in-out ${
-                                  open ? "max-h-[250px]" : "max-h-0"
-                                } space-y-4`}
-                              >
-                                {section.options.map((option, optionIdx) => (
-                                  <div
-                                    key={option.value}
-                                    className="flex items-center"
-                                  >
-                                    <input
-                                      id={`filter-${section.id}-${optionIdx}`}
-                                      name={`${section.id}[]`}
-                                      defaultValue={option.value}
-                                      type="checkbox"
-                                      defaultChecked={option.checked}
-                                      className="h-4 w-4 rounded border-gray-300 text-gradient-to-tr from-[#1e92d5] to-[#3d45cb] focus:ring-gradient-to-tr from-[#1e92d5] to-[#3d45cb]"
-                                    />
-                                    <label
-                                      htmlFor={`filter-${section.id}-${optionIdx}`}
-                                      className="ml-3 text-sm text-gray-600"
+                  {brandData && categoriesData && (
+                    <div className="w-full p-8 rounded-[10px] bg-white shadow-md">
+                      {filters.map((section) => (
+                        <Disclosure
+                          as="div"
+                          key={section.id}
+                          className="border-b border-gray-200 py-6"
+                          defaultOpen
+                        >
+                          {({ open }) => (
+                            <>
+                              <h3 className="-my-3 flow-root">
+                                <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                                  <span className="text-[16px] font-medium text-gray-900 text-left">
+                                    {section.name}
+                                  </span>
+                                  <span className="ml-6 flex items-center">
+                                    {open ? (
+                                      <div className="text-gray-900">
+                                        <SquareMinus size={21} />
+                                      </div>
+                                    ) : (
+                                      <div className="text-gray-900">
+                                        <SquarePlus size={21} />
+                                      </div>
+                                    )}
+                                  </span>
+                                </Disclosure.Button>
+                              </h3>
+                              <Disclosure.Panel className="pt-6">
+                                <div
+                                  className={`space-y-4`}
+                                >
+                                  {section.options.map((option, optionIdx) => (
+                                    <div
+                                      key={option.Name}
+                                      className="flex items-center"
                                     >
-                                      {option.label}
-                                    </label>
-                                  </div>
-                                ))}
-                              </div>
-                            </Disclosure.Panel>
-                          </>
-                        )}
-                      </Disclosure>
-                    ))}
-                  </div>
+                                      <label
+                                        htmlFor={`filter-${section.id}-${optionIdx}`}
+                                        className="ml-3 text-sm text-gray-600"
+                                      >
+                                        {option.Name}
+                                      </label>
+                                    </div>
+                                  ))}
+                                </div>
+                              </Disclosure.Panel>
+                            </>
+                          )}
+                        </Disclosure>
+                      ))}
+                    </div>
+                  )}
                 </form>
 
                 {/* Product grid */}

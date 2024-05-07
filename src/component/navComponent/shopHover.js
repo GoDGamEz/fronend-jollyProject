@@ -1,45 +1,54 @@
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-const solutions = [
-  {
-    name: "Electric Guitar",
-    href: "/electric",
-  },
-  {
-    name: "Acoustic Guitar",
-    href: "/acoustic",
-  },
-  {
-    name: "Bass",
-    href: "/bass",
-  },
-  {
-    name: "Keyboard",
-    href: "/keyboard",
-  },
-];
+const apiClient = axios.create({
+  baseURL: "https://jolly-online-store-3faac26a998e.herokuapp.com",
+});
+
 const callsToAction = [];
 
 export default function BrandsHover() {
+  const [categoriesData, setCategoriesData] = useState([]);
+
+  const solutions = categoriesData;
+
+  useEffect(() => {
+    if (categoriesData.length === 0) {
+      const fetchCategories = async () => {
+        try {
+          const response = await apiClient.get(`/categories`);
+          setCategoriesData(response.data);
+          console.log(response.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchCategories();
+    }
+  }, [categoriesData]);
+
   return (
-    <div className="relative group py-0 md:py-3">
-      <div className={`text-gray-100 group-hover:bg-gray-900 group-hover:shadow-md group-hover:text-white px-3 py-2 rounded-md text-[15px] lg:text-[16px] font-medium`}>
-        <div className="inline-flex items-center text-[15px] lg:text-[16px] font-medium gap-x-1 text-sm leading-6 outline-none">
+    <div className="all relative group py-0 md:py-4">
+      <div className={`px-2 py-1 rounded-md`}>
+        <div className="text-gray-100 text-[15px] lg:text-[16px] font-medium transition-colors ease-linear duration-200 delay-100 group-hover:text-[#ffc052] inline-flex items-center gap-x-1 px-1 py-1 leading-6 outline-none relative">
           <span>Shop</span>
           <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+          <div className="absolute bottom-0 left-0 w-0 h-[1px] transition-w duration-300 ease-linear group-hover:bg-[#ffb83e] group-hover:w-full"></div>
         </div>
 
         <div className="absolute left-1/2 z-10 mt-5 flex w-screen group-hover:max-w-max group-hover:max-h-max max-w-0 max-h-0 -translate-x-1/2 px-4">
-          <div className="w-full flex-auto overflow-hidden rounded-[18px] bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+          {categoriesData && (
+            <div className="w-full flex-auto overflow-hidden rounded-[18px] bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
             <div className="p-4">
               {solutions.map((item) => (
                 <div
-                  key={item.name}
+                  key={item.Name}
                   className="group relative flex gap-x-6 rounded-lg px-3 py-2 hover:bg-gray-200"
                 >
                   <div>
-                    <a href={item.href} className="font-semibold text-gray-900">
-                      {item.name}
+                    <a href={"/"+item.Name} className="font-semibold text-gray-900">
+                      {item.Name}
                       <span className="absolute inset-0" />
                     </a>
                   </div>
@@ -62,6 +71,7 @@ export default function BrandsHover() {
               ))}
             </div>
           </div>
+          )}
         </div>
       </div>
     </div>

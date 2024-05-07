@@ -1,12 +1,13 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Drum, ShoppingCart, EllipsisVertical } from "lucide-react";
+import { Drum, Heart, EllipsisVertical } from "lucide-react";
 import SearchBar from "./search";
-import { Fragment} from "react";
+import { Fragment } from "react";
 import BrandsHover from "./navComponent/brandsHover";
 import ShopHover from "./navComponent/shopHover";
 import HomeHover from "./navComponent/homeHover";
 import AllHover from "./navComponent/allHover";
+
 
 const navigation = [
   { name: <HomeHover />, href: "/" },
@@ -71,7 +72,7 @@ export default function Navbar() {
                     type="button"
                     className="relative shadow-md rounded-[10px] bg-gray-900 p-2 text-gray-300 hover:text-white focus:outline-none transition ease-in-out delay-100 hover:scale-110"
                   >
-                    <ShoppingCart size={23} className="w-[22px] lg:w-[23px]" />
+                    <Heart size={23} className="w-[22px] lg:w-[23px]" />
                   </button>
                   <Menu
                     as="div"
