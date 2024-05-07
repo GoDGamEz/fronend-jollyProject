@@ -3,7 +3,7 @@ import { X, Search } from 'lucide-react';
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'https://backend-ruby-eight.vercel.app',
+  baseURL: 'https://jolly-online-store-3faac26a998e.herokuapp.com',
 });
 
 const SearchBar = () => {
@@ -22,18 +22,18 @@ const SearchBar = () => {
     }, 5000);
   };
 
-  /*useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiClient.get(`/filter/product?searchString=${searchTerm}&take=20&skip=&orderBy=asc`);
-        setproductData(response.data);
+        const response = await apiClient.get(`/products`);
+        setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, [searchTerm, searchFetch])*/
+  }, [searchTerm, searchFetch]);
 
 
   return (
@@ -61,15 +61,15 @@ const SearchBar = () => {
             />
             {showSearch && (<div><X className="w-5 h-5 lg:w-6 lg:h-6 items-end cursor-pointer" onClick={() => {setShowSearchList(false); setTimeout(() => {setShowSearch(false);}, 400)}} /></div>)}
           </div>
-          <div className={`block absolute px-9 w-[213px] sm:w-[318px] md:w-[233px] lg:w-[298px] 2xl:w-[348px] ml-0.5 mt-2 z-10 bg-white rounded-[18px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out ${showSearchList ? 'max-h-[26.5vh]' : 'max-h-0'
+          <div className={`block absolute px-7 w-[213px] sm:w-[318px] md:w-[233px] lg:w-[298px] 2xl:w-[348px] ml-0.5 mt-2 z-10 bg-white rounded-[18px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out ${showSearchList ? 'max-h-[26.5vh]' : 'max-h-0'
             }`}>
             <ul className="py-2">
               {data ? (
                 data?.map((product) => (
-                  <a key={product.id} href={"/detail/" + product.proj_abbr_name}>
-                    <li className="cursor-pointer items-center w-full px-4 py-3 text-[12px] md:text-[14px] lg:text-[16px] font-semibold text-[#072C29] hover:bg-gray-200 rounded-[10px]">
-                      {product.proj_abbr_name}
-                      <span className='text-gray-400 font-normal flex flex-wrap text-[10px] md:text-[12px] lg:text-[14px] whitespace-normal'>{product.proj_name_th}</span>
+                  <a key={product.id} href={"/detail/" + product.ProductName}>
+                    <li className="cursor-pointer items-center w-full px-4 py-3 text-[11px] md:text-[13px] lg:text-[15px] font-semibold text-[#072C29] hover:bg-gray-200 rounded-[10px] whitespace-normal">
+                      {product.ProductName}
+                      <span className='text-gray-400 font-normal flex flex-wrap text-[10px] md:text-[12px] lg:text-[14px] whitespace-normal'>{product.Categories}</span>
                     </li>
                   </a>
                 ))

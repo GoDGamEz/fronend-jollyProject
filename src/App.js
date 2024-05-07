@@ -5,6 +5,7 @@ import Brands from "./component/page/brands"
 import Shop from "./component/page/shop"
 import Home from "./component/page/home"
 import Add from "./component/page/add";
+import Missing from "./component/page/missing";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       <Route path="/shop" element={<Shop />} />
       <Route path="/" element={<Home />} />
       <Route path="/add" element={<Add />} />
-      {/*<Route path="*" element={<Missing />} />*/}
+      <Route path="*" element={<Missing />} />
     </Routes>
   );
 }
