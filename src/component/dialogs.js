@@ -3,8 +3,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import { Check } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom";
-
 
 const apiClient = axios.create({
   baseURL: "https://jolly-online-store-3faac26a998e.herokuapp.com",
@@ -13,8 +11,6 @@ const apiClient = axios.create({
 export default function Delete({ select, setSelect }) {
   const [open, setOpen] = useState(true);
   const [doDelete, setDoDelete] = useState("");
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const cancelButtonRef = useRef(null);
 
@@ -26,8 +22,8 @@ export default function Delete({ select, setSelect }) {
         await apiClient.delete(`/products/${select[0]}`);
         setDoDelete("done");
         setTimeout(() => {
-          navigate('/all', { state: { from: location }, replace: true });
-        }, 3000);
+          window.location.href = "/all";
+        }, 1000);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
