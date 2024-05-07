@@ -48,7 +48,7 @@ export default function BrandsHover() {
                   >
                     <div>
                       <a
-                        href={"/"+item.Name}
+                        href={"/brand/"+item.Name}
                         className="font-semibold text-gray-900"
                       >
                         {item.Name}

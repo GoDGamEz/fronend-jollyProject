@@ -4,14 +4,18 @@ import All from "./component/page/all"
 import Brands from "./component/page/brands"
 import Shop from "./component/page/shop"
 import Home from "./component/page/home"
+import Add from "./component/page/add";
 
 function App() {
   return (
     <Routes>
       <Route path="/all" element={<All />} />
+      <Route path="/brand/*" element={<All />} />
+      <Route path="/category/*" element={<All />} />
       <Route path="/brands" element={<Brands />} />
       <Route path="/shop" element={<Shop />} />
       <Route path="/" element={<Home />} />
+      <Route path="/add" element={<Add />} />
       {/*<Route path="*" element={<Missing />} />*/}
     </Routes>
   );

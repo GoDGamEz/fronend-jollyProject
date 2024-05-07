@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/20/solid";
 import Product from "../product";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const apiClient = axios.create({
   baseURL: "https://jolly-online-store-3faac26a998e.herokuapp.com",
@@ -29,9 +30,14 @@ function classNames(...classes) {
 }
 
 export default function Page() {
+  const location = useLocation();
+  const url = location.pathname;
+  const partsBefore = url.split("/");
+  const parts = partsBefore.map(item => item.replace(/%20/g, ' '));
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [brandData, setBrandData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
+
 
   const filters = [
     {
@@ -171,7 +177,8 @@ export default function Page() {
                               <Disclosure.Panel className="pt-6">
                                 <div className="space-y-6">
                                   {section.options.map((option, optionIdx) => (
-                                    <div
+                                    <a
+                                      href={`${section.name === "ยี่ห้อ / Brand" ? "/brand/"+option.Name : section.name === "ชนิดสินค้า / Product Type" ? "/category/"+option.Name : option.Name}`}
                                       key={option.Name}
                                       className="flex items-center"
                                     >
@@ -181,7 +188,7 @@ export default function Page() {
                                       >
                                         {option.Name}
                                       </label>
-                                    </div>
+                                    </a>
                                   ))}
                                 </div>
                               </Disclosure.Panel>
@@ -278,7 +285,7 @@ export default function Page() {
                       </li>
                     ))}
                   </ul>
-                  {brandData && categoriesData && (
+                  {brandData.length !== 0 && categoriesData.length !== 0 ? (
                     <div className="w-full p-8 rounded-[10px] bg-white shadow-md">
                       {filters.map((section) => (
                         <Disclosure
@@ -296,7 +303,7 @@ export default function Page() {
                                   </span>
                                   <span className="ml-6 flex items-center">
                                     {open ? (
-                                      <div className="text-gray-900">
+                                      <div className="text-[#ffc052]">
                                         <SquareMinus size={21} />
                                       </div>
                                     ) : (
@@ -308,21 +315,20 @@ export default function Page() {
                                 </Disclosure.Button>
                               </h3>
                               <Disclosure.Panel className="pt-6">
-                                <div
-                                  className={`space-y-4`}
-                                >
+                                <div className={`space-y-1`}>
                                   {section.options.map((option, optionIdx) => (
-                                    <div
+                                    <a
+                                      href={`${section.name === "ยี่ห้อ / Brand" ? "/brand/"+option.Name : section.name === "ชนิดสินค้า / Product Type" ? "/category/"+option.Name : option.Name}`}
                                       key={option.Name}
-                                      className="flex items-center"
+                                      className={`${parts.includes(option.Name) ? "bg-[#fff4e2]" : "hover:bg-gray-200" } flex items-center rounded-[10px] py-[10px] cursor-pointer`}
                                     >
                                       <label
                                         htmlFor={`filter-${section.id}-${optionIdx}`}
-                                        className="ml-3 text-sm text-gray-600"
+                                        className={`${parts.includes(option.Name) ? "text-[#ff9d00]" : "text-gray-600" } ml-3 text-sm`}
                                       >
                                         {option.Name}
                                       </label>
-                                    </div>
+                                    </a>
                                   ))}
                                 </div>
                               </Disclosure.Panel>
@@ -330,6 +336,34 @@ export default function Page() {
                           )}
                         </Disclosure>
                       ))}
+                    </div>
+                  ) : (
+                    <div className="w-full p-8 rounded-[10px] bg-white shadow-md">
+                      <div className="col-start-3 col-span-3 flex justify-center items-center w-full h-[70vh]">
+                        <div className="flex items-center py-2 px-4 border border-transparent text-[13px] md:text-[14px] lg:text-[16px] font-medium rounded-md shadow-md text-gray-100 bg-gradient-to-tr from-[#1e92d5] to-[#3d45cb]">
+                          <svg
+                            className="animate-spin -ml-1 mr-[10px] h-[22px] w-[22px] text-gray-100"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              stroke-width="4"
+                            ></circle>
+                            <path
+                              className="opacity-100"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                          </svg>
+                          กำลังโหลดข้อมูล...
+                        </div>
+                      </div>
                     </div>
                   )}
                 </form>

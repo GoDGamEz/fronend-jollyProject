@@ -12,10 +12,10 @@ import AllHover from "./navComponent/allHover";
 const navigation = [
   { name: <HomeHover />, href: "/" },
   { name: <AllHover />, href: "/all" },
-  { name: <ShopHover />, href: "/shop" },
-  { name: <BrandsHover />, href: "/brands" },
+  { name: <ShopHover />, href: "/all" },
+  { name: <BrandsHover />, href: "/all" },
 ];
-const options = [{ name: "Add Data", href: "#", current: true }];
+const options = [{ name: "Add Data", href: "/add", current: true }];
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }

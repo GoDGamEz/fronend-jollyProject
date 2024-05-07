@@ -47,7 +47,7 @@ export default function BrandsHover() {
                   className="group relative flex gap-x-6 rounded-lg px-3 py-2 hover:bg-gray-200"
                 >
                   <div>
-                    <a href={"/"+item.Name} className="font-semibold text-gray-900">
+                    <a href={"/category/"+item.Name} className="font-semibold text-gray-900">
                       {item.Name}
                       <span className="absolute inset-0" />
                     </a>
