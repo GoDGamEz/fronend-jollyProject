@@ -101,6 +101,15 @@ export default function Form() {
                 >
                   <option>Fender</option>
                   <option>Gibson</option>
+                  <option>Squier</option>
+                  <option>Epiphone</option>
+                  <option>Evh</option>
+                  <option>Blackstar</option>
+                  <option>Korg</option>
+                  <option>Jackson</option>
+                  <option>Music Man</option>
+                  <option>Sterling by MusicMan</option>
+                  <option>Vox Amp</option>
                 </select>
               </div>
             </div>
@@ -123,6 +132,9 @@ export default function Form() {
                   <option>Electric Guitar</option>
                   <option>Acoustic guitar</option>
                   <option>Bass</option>
+                  <option>Piano</option>
+                  <option>Keyboard</option>
+                  <option>Drum</option>
                 </select>
               </div>
             </div>

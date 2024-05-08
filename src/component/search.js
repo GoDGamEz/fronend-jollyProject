@@ -22,7 +22,7 @@ const SearchBar = () => {
     }, 5000);
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await apiClient.get(`/products`);
@@ -33,7 +33,7 @@ const SearchBar = () => {
     };
 
     fetchData();
-  }, [searchTerm, searchFetch]);
+  }, [searchTerm, searchFetch]);*/
 
 
   return (

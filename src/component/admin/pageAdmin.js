@@ -1,19 +1,14 @@
 import { Fragment, useState, useEffect } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import {
-  PackageSearch,
-  SquarePlus,
-  SquareMinus,
-  ShoppingCart,
-} from "lucide-react";
+import { PackageSearch, SquarePlus, SquareMinus } from "lucide-react";
 import {
   ChevronDownIcon,
   FunnelIcon,
   MinusIcon,
   PlusIcon,
 } from "@heroicons/react/20/solid";
-import Product from "../product";
+import Product from "../admin/productAdmin";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
@@ -23,8 +18,8 @@ const apiClient = axios.create({
 
 const sortOptions = [
   { name: "None", href: "/all", current: true },
-  { name: "Price: Low to High", href: "/ntom", current: true },
-  { name: "Price: High to Low", href: "/mton", current: true },
+  { name: "Price: Low to High", href: "/ntom", current: true},
+  { name: "Price: High to Low", href: "/mton", current: true},
 ];
 const subCategories = [];
 
@@ -36,11 +31,13 @@ export default function Page() {
   const location = useLocation();
   const url = location.pathname;
   const partsBefore = url.split("/");
-  const parts = partsBefore.map((item) => item.replace(/%20/g, " "));
+  const parts = partsBefore.map(item => item.replace(/%20/g, ' '));
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [brandData, setBrandData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
-  const [cart, setCart] = useState(false);
+  const [seriesData, setSeriesData] = useState([]);
+  const [typesData, setTypesData] = useState([]);
+
 
   const filters = [
     {
@@ -49,8 +46,8 @@ export default function Page() {
       options: brandData,
     },
     {
-      id: "Type",
-      name: "ชนิดสินค้า / Product Type",
+      id: "Category",
+      name: "หมวดหมู่ / Category",
       options: categoriesData,
     },
   ];
@@ -61,7 +58,6 @@ export default function Page() {
         try {
           const response = await apiClient.get(`/categories`);
           setCategoriesData(response.data);
-          console.log(response.data);
         } catch (error) {
           console.error("Error fetching data:", error);
         }
@@ -76,7 +72,6 @@ export default function Page() {
         try {
           const response = await apiClient.get(`/brand`);
           setBrandData(response.data);
-          console.log(response.data);
         } catch (error) {
           console.error("Error fetching data:", error);
         }
@@ -84,6 +79,34 @@ export default function Page() {
       fetchBrand();
     }
   }, [brandData]);
+
+  /*useEffect(() => {
+    if (seriesData.length === 0) {
+      const fetchSeries = async () => {
+        try {
+          const response = await apiClient.get(`/brand`);
+          setSeriesData(response.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchSeries();
+    }
+  }, [seriesData]);
+
+  useEffect(() => {
+    if (typesData.length === 0) {
+      const fetchTypes = async () => {
+        try {
+          const response = await apiClient.get(`/brand`);
+          setTypesData(response.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchTypes();
+    }
+  }, [typesData]);*/
 
   return (
     <div className="bg-[#f9f9f9]">
@@ -181,14 +204,7 @@ export default function Page() {
                                 <div className="space-y-6">
                                   {section.options.map((option, optionIdx) => (
                                     <a
-                                      href={`${
-                                        section.name === "ยี่ห้อ / Brand"
-                                          ? "/brand/" + option.Name
-                                          : section.name ===
-                                            "ชนิดสินค้า / Product Type"
-                                          ? "/category/" + option.Name
-                                          : option.Name
-                                      }`}
+                                      href={`${section.name === "ยี่ห้อ / Brand" ? "/brand/"+option.Name : section.name === "หมวดหมู่ / Category" ? "/category/"+option.Name : section.name === "ซีรี่ส์ / Series" ? "/series/"+option.Name : section.name === "ชนิดสินค้า / Type" ? "/type/"+option.Name : option.Name}`}
                                       key={option.Name}
                                       className="flex items-center"
                                     >
@@ -219,21 +235,7 @@ export default function Page() {
                 <PackageSearch size={32} className="mr-3" /> All Products
               </h1>
 
-              <button
-                type="button"
-                className="ml-auto mr-3 relative shadow-md rounded-[10px] bg-gray-900 p-2 text-gray-300 hover:text-white focus:outline-none transition ease-in-out delay-100 hover:scale-110"
-                onClick={() => setCart(!cart)}
-              >
-                <ShoppingCart
-                  size={23}
-                  fill={cart ? "#ffb83e" : "none"}
-                  className={`${
-                    cart ? "text-[#ffb83e]" : ""
-                  } w-[22px] lg:w-[23px]`}
-                />
-              </button>
-
-              <div className="flex items-center my-auto">
+              <div className="flex items-center">
                 <Menu as="div" className="relative inline-block text-left px-2">
                   <div>
                     <Menu.Button className="group inline-flex justify-center text-md font-medium text-gray-700 hover:text-gray-900">
@@ -342,28 +344,13 @@ export default function Page() {
                                 <div className={`space-y-1`}>
                                   {section.options.map((option, optionIdx) => (
                                     <a
-                                      href={`${
-                                        section.name === "ยี่ห้อ / Brand"
-                                          ? "/brand/" + option.Name
-                                          : section.name ===
-                                            "ชนิดสินค้า / Product Type"
-                                          ? "/category/" + option.Name
-                                          : option.Name
-                                      }`}
+                                      href={`${section.name === "ยี่ห้อ / Brand" ? "/brand/"+option.Name : section.name === "ชนิดสินค้า / Product Type" ? "/category/"+option.Name : option.Name}`}
                                       key={option.Name}
-                                      className={`${
-                                        parts.includes(option.Name)
-                                          ? "bg-[#fff4e2]"
-                                          : "hover:bg-gray-200"
-                                      } flex items-center rounded-[10px] py-[10px] cursor-pointer`}
+                                      className={`${parts.includes(option.Name) ? "bg-[#fff4e2]" : "hover:bg-gray-200" } flex items-center rounded-[10px] py-[10px] cursor-pointer`}
                                     >
                                       <label
                                         htmlFor={`filter-${section.id}-${optionIdx}`}
-                                        className={`${
-                                          parts.includes(option.Name)
-                                            ? "text-[#ff9d00]"
-                                            : "text-gray-600"
-                                        } ml-3 text-sm`}
+                                        className={`${parts.includes(option.Name) ? "text-[#ff9d00]" : "text-gray-600" } ml-3 text-sm`}
                                       >
                                         {option.Name}
                                       </label>
@@ -409,7 +396,7 @@ export default function Page() {
 
                 {/* Product grid */}
                 <div className="lg:col-span-3">
-                  <Product clickCart={cart} />
+                  <Product />
                 </div>
               </div>
             </section>

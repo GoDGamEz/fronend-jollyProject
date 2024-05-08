@@ -1,8 +1,8 @@
-import Navbar from "../navbar";
+import Navbar from "./navbarAdmin";
 import React from "react";
-import Page from "./page"
+import Page from "./pageAdmin";
 
-function Shop() {
+function Admin() {
   return (
     <div className="bg-[#f9f9f9] min-h-[100vh]">
       <header className="sticky top-0 z-10">
@@ -15,4 +15,4 @@ function Shop() {
   );
 }
 
-export default Shop;
+export default Admin;

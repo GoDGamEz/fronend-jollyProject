@@ -1,12 +1,12 @@
-import { Disclosure } from "@headlessui/react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Drum, Heart } from "lucide-react";
-import SearchBar from "./search";
-
-import BrandsHover from "./navComponent/brandsHover";
-import ShopHover from "./navComponent/shopHover";
-import HomeHover from "./navComponent/homeHover";
-import AllHover from "./navComponent/allHover";
+import { Drum, Heart, EllipsisVertical } from "lucide-react";
+import SearchBar from "../search";
+import { Fragment } from "react";
+import BrandsHover from "../navComponent/brandsHover";
+import ShopHover from "../navComponent/shopHover";
+import HomeHover from "../navComponent/homeHover";
+import AllHover from "../navComponent/allHover";
 
 
 const navigation = [
@@ -15,7 +15,9 @@ const navigation = [
   { name: <ShopHover />, href: "/all" },
   { name: <BrandsHover />, href: "/all" },
 ];
-
+const options = [
+  { name: "Add Data", href: "/add", current: true }
+];
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -74,6 +76,57 @@ export default function Navbar() {
                   >
                     <Heart size={23} className="w-[22px] lg:w-[23px]" />
                   </button>
+                  <Menu
+                    as="div"
+                    className="relative inline-block text-left px-2"
+                  >
+                    <div>
+                      <Menu.Button className="group inline-flex justify-center text-md font-medium text-gray-700 hover:text-gray-900">
+                        <button
+                          type="button"
+                          className="relative shadow-md rounded-[10px] bg-gray-900 p-2 text-gray-300 hover:text-white focus:outline-none transition ease-in-out delay-100 hover:scale-110"
+                        >
+                          <EllipsisVertical
+                            size={23}
+                            className="w-[22px] lg:w-[23px]"
+                          />
+                        </button>
+                      </Menu.Button>
+                    </div>
+
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-2 z-10 mt-3 w-40 origin-top-right rounded-md bg-white shadow-2xl outline-none">
+                        <div className="py-1">
+                          {options.map((option) => (
+                            <Menu.Item key={option.name}>
+                              {({ active }) => (
+                                <a
+                                  href={option.href}
+                                  className={classNames(
+                                    option.current
+                                      ? "font-medium text-gray-900"
+                                      : "text-gray-500",
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm"
+                                  )}
+                                >
+                                  {option.name}
+                                </a>
+                              )}
+                            </Menu.Item>
+                          ))}
+                        </div>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
                 </div>
               </div>
             </div>

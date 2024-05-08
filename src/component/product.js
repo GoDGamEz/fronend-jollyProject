@@ -1,25 +1,14 @@
-import { Trash2, FilePenLine, Check } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Delete from "../component/dialogs";
 import { useLocation } from "react-router-dom";
 
 const apiClient = axios.create({
   baseURL: "https://jolly-online-store-3faac26a998e.herokuapp.com",
 });
 
-export default function Products() {
-  const [selectDelete, setSelectDelete] = useState([]);
-  const [formData, setFormData] = useState({
-    productId: "",
-    productName: "",
-    brandName: "Fender",
-    categoryName: "Electric Guitar",
-    price: "",
-    stockQuantity: "",
-  });
-  const [showEdit, setShowEdit] = useState(false);
-  const [doEdit, setDoEdit] = useState("");
+export default function Products({ clickCart }) {
+  const [selectCart, setSelectCart] = useState([]);
   const [productsData, setProductsData] = useState([]);
   const location = useLocation();
 
@@ -85,52 +74,8 @@ export default function Products() {
     }
   }, [productsData]);
 
-  const handleDelete = (deleteData) => {
-    setSelectDelete(deleteData);
-  };
-
-  const handleEdit = (edit) => {
-    const [productId, productName, brand, categories, price, stockQuantity] =
-      edit;
-
-    setFormData({
-      productId: productId,
-      productName: productName,
-      brandName: brand,
-      categoryName: categories,
-      price: price,
-      stockQuantity: stockQuantity,
-    });
-    setShowEdit(true);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const isAnyValueNull = Object.values(formData).some(
-      (value) => value === null || value === ""
-    );
-
-    if (isAnyValueNull) {
-      return;
-    }
-
-    setDoEdit("do");
-    console.log("Form Data:", formData);
-    try {
-      await apiClient.post(`/products/` + formData.productId, formData);
-      setDoEdit("done");
-      setTimeout(() => {
-        window.location.href = "/all";
-      }, 1000);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+  const handleCart = (c) => {
+    setSelectCart([...selectCart, c]);
   };
 
   return (
@@ -167,39 +112,29 @@ export default function Products() {
                     {"฿ " + parseInt(product.Price)}
                   </p>
                 </div>
-                <div className="absolute bottom-0 right-0 m-4 space-x-2">
-                  <button
-                    type="button"
-                    className=" relative shadow-md rounded-[10px] opacity-80 bg-gradient-to-tr from-[#4eb9f7] to-[#353cc3] p-2 text-white scale-0 focus:outline-none transition ease-linear delay-100 group-hover:scale-100"
-                    onClick={() =>
-                      handleEdit([
-                        product.ProductID,
-                        product.ProductName,
-                        product.Brand,
-                        product.Categories,
-                        product.Price,
-                        product.StockQuantity,
-                      ])
-                    }
-                  >
-                    <FilePenLine
-                      size={21}
-                      className={`w-[20px] lg:w-[21px] transition-colors duration-200 ease-in-out`}
-                    />
-                  </button>
-                  <button
-                    type="button"
-                    className=" relative shadow-md rounded-[10px] opacity-80 bg-gradient-to-tr from-[#ffbb46] to-[#df2421] p-2 text-white scale-0 focus:outline-none transition ease-linear delay-100 group-hover:scale-100"
-                    onClick={() =>
-                      handleDelete([product.ProductID, product.ProductName])
-                    }
-                  >
-                    <Trash2
-                      size={21}
-                      className={`w-[20px] lg:w-[21px] transition-colors duration-200 ease-in-out`}
-                    />
-                  </button>
-                </div>
+                {clickCart && (
+                  <div className="absolute bottom-0 right-0 m-4 space-x-2">
+                    <button
+                      type="button"
+                      className=" relative shadow-md rounded-[10px] opacity-80 bg-gradient-to-tr from-[#4eb9f7] to-[#353cc3] p-2 text-white scale-0 focus:outline-none transition ease-linear delay-100 group-hover:scale-100"
+                      onClick={() =>
+                        handleCart([
+                          product.ProductID,
+                          product.ProductName,
+                          product.Brand,
+                          product.Categories,
+                          product.Price,
+                          product.StockQuantity,
+                        ])
+                      }
+                    >
+                      <CirclePlus
+                        size={21}
+                        className={`w-[20px] lg:w-[21px] transition-colors duration-200 ease-in-out`}
+                      />
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -231,207 +166,6 @@ export default function Products() {
           </div>
         )}
       </div>
-      {selectDelete.length !== 0 && (
-        <Delete select={selectDelete} setSelect={setSelectDelete} />
-      )}
-      {showEdit && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white flex flex-col items-center pt-2 pb-5 px-2 space-y-6 rounded-[18px] shadow-md relative">
-            <form onSubmit={handleSubmit}>
-              <div className="space-y-12 max-w-7xl bg-white p-8 rounded-[18px] shadow-lg">
-                <div className="border-b border-gray-900/10 pb-12">
-                  <div className="flex space-x-2">
-                    <div>
-                      <FilePenLine />
-                    </div>
-                    <h2 className="text-xl font-semibold leading-7 text-gray-900">
-                      Edit Data
-                    </h2>
-                  </div>
-
-                  <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div className="sm:col-span-4">
-                      <label
-                        htmlFor="Product Name"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Product Name
-                      </label>
-                      <div className="mt-2">
-                        <div className="flex rounded-md shadow-sm sm:max-w-md">
-                          <input
-                            type="text"
-                            name="productName"
-                            id="productName"
-                            value={formData.productName}
-                            onChange={handleInputChange}
-                            className="block flex-1 border rounded-md border-gray-300 bg-transparent py-1.5 pl-2 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                            placeholder="Fender ..."
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-3">
-                      <label
-                        htmlFor="brandName"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Brand
-                      </label>
-                      <div className="mt-2">
-                        <select
-                          id="brandName"
-                          name="brandName"
-                          value={formData.brandName}
-                          onChange={handleInputChange}
-                          className="block w-full rounded-md border rounded-md border-gray-300 px-1 py-1.5 text-gray-900 shadow-sm sm:max-w-xs sm:text-sm sm:leading-6"
-                        >
-                          <option>Fender</option>
-                          <option>Gibson</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-3">
-                      <label
-                        htmlFor="categoryName"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Category
-                      </label>
-                      <div className="mt-2">
-                        <select
-                          id="categoryName"
-                          name="categoryName"
-                          value={formData.categoryName}
-                          onChange={handleInputChange}
-                          className="block w-full rounded-md border rounded-md border-gray-300 px-1 py-1.5 text-gray-900 shadow-sm sm:max-w-xs sm:text-sm sm:leading-6"
-                        >
-                          <option>Electric Guitar</option>
-                          <option>Acoustic guitar</option>
-                          <option>Bass</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-2 sm:col-start-1">
-                      <label
-                        htmlFor="Price"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Price
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="text"
-                          name="price"
-                          id="price"
-                          onInput={(e) => {
-                            e.target.value = e.target.value.replace(
-                              /[^0-9]/g,
-                              ""
-                            ); // Remove non-numeric characters
-                          }}
-                          value={formData.price}
-                          onChange={handleInputChange}
-                          className="block w-full rounded-md border rounded-md border-gray-300 px-2 py-1.5 text-gray-900 shadow-sm sm:text-sm sm:leading-6"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-2">
-                      <label
-                        htmlFor="Stock Quantity"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Stock Quantity
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="text"
-                          name="stockQuantity"
-                          id="stockQuantity"
-                          onInput={(e) => {
-                            e.target.value = e.target.value.replace(
-                              /[^0-9]/g,
-                              ""
-                            ); // Remove non-numeric characters
-                          }}
-                          value={formData.stockQuantity}
-                          onChange={handleInputChange}
-                          className="block w-full rounded-md border rounded-md border-gray-300 px-2 py-1.5 text-gray-900 shadow-sm sm:text-sm sm:leading-6"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-5 mr-4 flex items-center justify-end gap-x-6">
-                {doEdit === "do" && (
-                  <div className="flex items-center mr-0">
-                    <svg
-                      className="animate-spin -ml-1 mr-[0px] h-[22px] w-[22px] text-gray-600"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        stroke-width="4"
-                      ></circle>
-                      <path
-                        className="opacity-100"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                  </div>
-                )}
-                {doEdit === "done" && (
-                  <div className="flex items-center mr-0">
-                    <Check
-                      size={28}
-                      strokeWidth={3}
-                      className="text-[#00bc91]"
-                    />
-                  </div>
-                )}
-                <button
-                  type="submit"
-                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  disabled={doEdit}
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                  disabled={doEdit}
-                  onClick={() => {
-                    setFormData({
-                      productId: "",
-                      productName: "",
-                      brandName: "Fender",
-                      categoryName: "Electric Guitar",
-                      price: "",
-                      stockQuantity: "",
-                    });
-                    setShowEdit(false);
-                  }}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

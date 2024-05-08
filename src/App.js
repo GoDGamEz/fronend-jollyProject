@@ -1,22 +1,18 @@
 import React from "react";
 import { Route, Routes } from 'react-router-dom';
-import All from "./component/page/all"
-import Brands from "./component/page/brands"
-import Shop from "./component/page/shop"
 import Home from "./component/page/home"
 import Add from "./component/page/add";
 import Missing from "./component/page/missing";
+import Admin from "./component/admin/admin";
 
 function App() {
   return (
     <Routes>
-      <Route path="/all" element={<All />} />
-      <Route path="/brand/*" element={<All />} />
-      <Route path="/category/*" element={<All />} />
-      <Route path="/ntom" element={<All />} />
-      <Route path="/mton" element={<All />} />
-      <Route path="/brands" element={<Brands />} />
-      <Route path="/shop" element={<Shop />} />
+      <Route path="/all" element={<Admin  />} />
+      <Route path="/brand/*" element={<Admin  />} />
+      <Route path="/category/*" element={<Admin  />} />
+      <Route path="/ntom" element={<Admin />} />
+      <Route path="/mton" element={<Admin  />} />
       <Route path="/" element={<Home />} />
       <Route path="/add" element={<Add />} />
       <Route path="*" element={<Missing />} />
