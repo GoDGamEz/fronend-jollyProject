@@ -123,7 +123,7 @@ export default function Products() {
     setDoEdit("do");
     console.log("Form Data:", formData);
     try {
-      await apiClient.post(`/products/` + formData.productId, formData);
+      await apiClient.put(`/products/`+formData.productId, formData);
       setDoEdit("done");
       setTimeout(() => {
         window.location.href = "/all";

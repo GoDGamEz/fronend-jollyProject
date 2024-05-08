@@ -1,4 +1,4 @@
-import Navbar from "../navbar";
+import Navbar from "../admin/navbarAdmin";
 import React from "react";
 import homePic from "./homePic.png";
 import { ArrowRight, Store, DatabaseBackup, ClipboardPenLine, AppWindow, Combine } from "lucide-react";
@@ -55,7 +55,7 @@ function Home() {
             </div>
           </div>
           <div>
-            <p className="">ณัชภู หมายประทุม</p>
+            <p className="">ณัชภู หมายประทุม (ภู)</p>
             <p>6534419223</p>
           </div>
         </div>
@@ -66,7 +66,7 @@ function Home() {
             </div>
           </div>
           <div>
-            <p className="">ภาสกร ฐิตะวรรณ</p>
+            <p className="">ภาสกร ฐิตะวรรณ (เปรม)</p>
             <p>6534448423</p>
           </div>
         </div>
@@ -77,7 +77,7 @@ function Home() {
             </div>
           </div>
           <div>
-            <p className="">ชิษณุชา ลิ้มพลาสุข</p>
+            <p className="">ชิษณุชา ลิ้มพลาสุข (เบส)</p>
             <p>6534415723</p>
           </div>
         </div>

@@ -35,9 +35,6 @@ export default function Page() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [brandData, setBrandData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
-  const [seriesData, setSeriesData] = useState([]);
-  const [typesData, setTypesData] = useState([]);
-
 
   const filters = [
     {
@@ -344,7 +341,7 @@ export default function Page() {
                                 <div className={`space-y-1`}>
                                   {section.options.map((option, optionIdx) => (
                                     <a
-                                      href={`${section.name === "ยี่ห้อ / Brand" ? "/brand/"+option.Name : section.name === "ชนิดสินค้า / Product Type" ? "/category/"+option.Name : option.Name}`}
+                                      href={`${section.name === "ยี่ห้อ / Brand" ? "/brand/"+option.Name : section.name === "หมวดหมู่ / Category" ? "/category/"+option.Name : option.Name}`}
                                       key={option.Name}
                                       className={`${parts.includes(option.Name) ? "bg-[#fff4e2]" : "hover:bg-gray-200" } flex items-center rounded-[10px] py-[10px] cursor-pointer`}
                                     >
