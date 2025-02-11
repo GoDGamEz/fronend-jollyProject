@@ -9,9 +9,21 @@ const apiClient = axios.create({
 const callsToAction = [];
 
 export default function BrandsHover() {
-  const [brandData, setBrandData] = useState([]);
+  const [brandData, setBrandData] = useState([
+    "Fender",
+    "Gibson",
+    "Squier",
+    "Epiphone",
+    "Evh",
+    "Blackstar",
+    "Korg",
+    "Jackson",
+    "Music Man",
+    "Sterling by MusicMan",
+    "Vox Amp"
+  ]);
 
-  const solutions = brandData;
+  const solutions = brandData.map((brand) => ({ Name: brand }));
 
   useEffect(() => {
     if (brandData.length === 0) {

@@ -78,10 +78,10 @@ export default function Navbar() {
                   </button>
                   <Menu
                     as="div"
-                    className="relative inline-block text-left px-2"
+                    className="relative block text-left px-2"
                   >
                     <div>
-                      <Menu.Button className="group inline-flex justify-center text-md font-medium text-gray-700 hover:text-gray-900">
+                      <Menu.Button className="group flex items-center justify-center text-md font-medium text-gray-700 hover:text-gray-900">
                         <button
                           type="button"
                           className="relative shadow-md rounded-[10px] bg-gray-900 p-2 text-gray-300 hover:text-white focus:outline-none transition ease-in-out delay-100 hover:scale-110"

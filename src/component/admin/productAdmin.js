@@ -20,7 +20,89 @@ export default function Products() {
   });
   const [showEdit, setShowEdit] = useState(false);
   const [doEdit, setDoEdit] = useState("");
-  const [productsData, setProductsData] = useState([]);
+  const [productsData, setProductsData] = useState([
+    {
+      ProductID: "P001",
+      ProductName: "Fender Stratocaster",
+      Brand: "Fender",
+      Categories: "Electric Guitar",
+      Price: 1200,
+      StockQuantity: 1,
+    },
+    {
+      ProductID: "P002",
+      ProductName: "Gibson Les Paul",
+      Brand: "Gibson",
+      Categories: "Electric Guitar",
+      Price: 2500,
+      StockQuantity: 5,
+    },
+    {
+      ProductID: "P003",
+      ProductName: "Squier Telecaster",
+      Brand: "Squier",
+      Categories: "Electric Guitar",
+      Price: 500,
+      StockQuantity: 5,
+    },
+    {
+      ProductID: "P004",
+      ProductName: "Epiphone SG",
+      Brand: "Epiphone",
+      Categories: "Electric Guitar",
+      Price: 700,
+      StockQuantity: 8,
+    },
+    {
+      ProductID: "P005",
+      ProductName: "Blackstar HT-5R Amp",
+      Brand: "Blackstar",
+      Categories: "Amplifier",
+      Price: 400,
+      StockQuantity: 2,
+    },
+    {
+      ProductID: "P006",
+      ProductName: "Korg Volca Beats",
+      Brand: "Korg",
+      Categories: "Drum Machine",
+      Price: 150,
+      StockQuantity: 9,
+    },
+    {
+      ProductID: "P007",
+      ProductName: "Jackson Rhoads",
+      Brand: "Jackson",
+      Categories: "Electric Guitar",
+      Price: 1800,
+      StockQuantity: 4,
+    },
+    {
+      ProductID: "P008",
+      ProductName: "Music Man StingRay Bass",
+      Brand: "Music Man",
+      Categories: "Bass Guitar",
+      Price: 2200,
+      StockQuantity: 6,
+    },
+    {
+      ProductID: "P009",
+      ProductName: "Sterling by MusicMan Cutlass",
+      Brand: "Sterling by MusicMan",
+      Categories: "Electric Guitar",
+      Price: 850,
+      StockQuantity: 9,
+    },
+    {
+      ProductID: "P010",
+      ProductName: "Vox AC30 Combo Amp",
+      Brand: "Vox Amp",
+      Categories: "Amplifier",
+      Price: 1300,
+      StockQuantity: 7,
+    },
+  ]);
+
   const location = useLocation();
 
   const products = productsData;

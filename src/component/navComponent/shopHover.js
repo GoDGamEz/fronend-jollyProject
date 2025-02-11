@@ -9,9 +9,16 @@ const apiClient = axios.create({
 const callsToAction = [];
 
 export default function BrandsHover() {
-  const [categoriesData, setCategoriesData] = useState([]);
+  const [categoriesData, setCategoriesData] = useState([
+    "Electric Guitar",
+    "Acoustic guitar",
+    "Bass",
+    "Piano",
+    "Keyboard",
+    "Drum"
+  ]);
 
-  const solutions = categoriesData;
+  const solutions = categoriesData.map((category) => ({ Name: category }));
 
   useEffect(() => {
     if (categoriesData.length === 0) {

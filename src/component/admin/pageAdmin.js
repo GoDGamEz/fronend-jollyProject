@@ -33,19 +33,38 @@ export default function Page() {
   const partsBefore = url.split("/");
   const parts = partsBefore.map(item => item.replace(/%20/g, ' '));
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [brandData, setBrandData] = useState([]);
-  const [categoriesData, setCategoriesData] = useState([]);
+  const [brandData, setBrandData] = useState([
+    "Fender",
+    "Gibson",
+    "Squier",
+    "Epiphone",
+    "Evh",
+    "Blackstar",
+    "Korg",
+    "Jackson",
+    "Music Man",
+    "Sterling by MusicMan",
+    "Vox Amp"
+  ]);
+  const [categoriesData, setCategoriesData] = useState([
+    "Electric Guitar",
+    "Acoustic guitar",
+    "Bass",
+    "Piano",
+    "Keyboard",
+    "Drum"
+  ]);
 
   const filters = [
     {
       id: "Brand",
       name: "ยี่ห้อ / Brand",
-      options: brandData,
+      options: brandData.map((brand) => ({ Name: brand })),
     },
     {
       id: "Category",
       name: "หมวดหมู่ / Category",
-      options: categoriesData,
+      options: categoriesData.map((category) => ({ Name: category })),
     },
   ];
 
@@ -157,7 +176,6 @@ export default function Page() {
                     <form className="mt-4">
                       <h3 className="sr-only">Categories</h3>
                       <ul
-                        role="list"
                         className="px-2 py-0 font-medium text-gray-900 border-b border-gray-200"
                       >
                         {subCategories.map((category) => (
@@ -299,7 +317,6 @@ export default function Page() {
                 <form className="hidden lg:flex lg:justify-center pt-6">
                   <h3 className="sr-only">Categories</h3>
                   <ul
-                    role="list"
                     className="space-y-4 pb-6 text-sm font-medium text-gray-900"
                   >
                     {subCategories.map((category) => (
